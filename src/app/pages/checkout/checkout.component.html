@@ -1,0 +1,79 @@
+<section class="p-4 my-5 bg-slate-100 rounded w-2/3 mx-auto shadow-md">
+    <div class="myContainer">
+        <form [formGroup]="dataForm" (ngSubmit)="payNow()" >
+            <div class="my-5">
+                @let detailsControl = dataForm.get('details');
+                <label for="details" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Details:</label>
+                <input [class]="{
+                    'myValid' : !detailsControl?.errors && (detailsControl?.touched || detailsControl?.dirty),
+                    'myInValid' : detailsControl?.errors && (detailsControl?.touched || detailsControl?.dirty)
+                }" formControlName="details" type="text" id="details" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 " required />
+                @if (detailsControl?.errors && detailsControl?.touched) {
+                    <div class="flex p-4 my-5 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                        <svg class="shrink-0 inline w-4 h-4 me-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                        </svg>
+                        <span class="sr-only">Danger</span>
+                        <div>
+                            <ul class="mt-1.5 list-disc list-inside">
+                              @if (detailsControl?.getError('required')) {<li>detaile are required</li>}
+                          </ul>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="my-5">
+                @let phoneControl = dataForm.get('phone');
+                <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone:</label>
+                <input [class]="{
+                    'myValid' : !phoneControl?.errors && (phoneControl?.touched || phoneControl?.dirty),
+                    'myInValid' : phoneControl?.errors && (phoneControl?.touched || phoneControl?.dirty)
+                }" formControlName="phone" type="tel" id="phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 " required />
+                @if (phoneControl?.errors && phoneControl?.touched) {
+                    <div class="flex p-4 my-5 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                        <svg class="shrink-0 inline w-4 h-4 me-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                        </svg>
+                        <span class="sr-only">Danger</span>
+                        <div>
+                            <ul class="mt-1.5 list-disc list-inside">
+                              @if (phoneControl?.getError('required')) {<li>phone is required</li>}
+                          </ul>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="my-5">
+                @let cityControl = dataForm.get('city');
+                <label for="city" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">City:</label>
+                <input [class]="{
+                    'myValid' : !cityControl?.errors && (cityControl?.touched || cityControl?.dirty),
+                    'myInValid' : cityControl?.errors && (cityControl?.touched || cityControl?.dirty)
+                }" formControlName="city" type="text" id="city" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 " required />
+                @if (cityControl?.errors && cityControl?.touched) {
+                    <div class="flex p-4 my-5 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                        <svg class="shrink-0 inline w-4 h-4 me-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                        </svg>
+                        <span class="sr-only">Danger</span>
+                        <div>
+                            <ul class="mt-1.5 list-disc list-inside">
+                              @if (cityControl?.getError('required')) {<li>city is required</li>}
+                          </ul>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="flex justify-end items-center">
+                <button [disabled]="dataForm.invalid" (click)="payWithCard()" class="bg-main rounded-md text-white hover:bg-emerald-600 hover:shadow-md transition-all duration-300 p-2 block disabled:bg-slate-200 me-1">
+                    @if (!loading) {<span>Pay with Card</span>}
+                    @if (loading) {<span><i class="fa-solid fa-circle-notch fa-spin"></i></span>}
+                </button>
+                <button [disabled]="dataForm.invalid" (click)="payNow()" class="bg-main rounded-md text-white hover:bg-emerald-600 hover:shadow-md transition-all duration-300 p-2 block disabled:bg-slate-200">
+                    @if (!loading) {<span>Pay Now</span>}
+                    @if (loading) {<span><i class="fa-solid fa-circle-notch fa-spin"></i></span>}
+                </button>
+            </div>
+        </form>
+    </div>
+</section>

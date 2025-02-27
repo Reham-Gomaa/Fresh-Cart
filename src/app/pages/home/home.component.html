@@ -1,0 +1,96 @@
+<section class="p-4 my-5">
+    <div class="myContainer">
+        <div class="flex flex-wrap">
+            <div class="w-full md:w-1/2 lg:w-3/4">
+                <owl-carousel-o [options]="mainSliderOptions">
+                    <ng-template carouselSlide><img src="./images/img1.avif" class="w-full h-80"></ng-template>  
+                    <ng-template carouselSlide><img src="./images/img2.avif" class="w-full h-80"></ng-template>  
+                    <ng-template carouselSlide><img src="./images/img3.avif" class="w-full h-80"></ng-template>  
+                    <ng-template carouselSlide><img src="./images/img4.avif" class="w-full h-80"></ng-template>  
+                </owl-carousel-o>
+            </div>
+            <div class="w-full md:w-1/2 lg:w-1/4">
+                <img src="./images/grocery-banner.png" class="w-full h-40">
+                <img src="./images/grocery-banner-2.jpeg" class="w-full h-40">
+            </div>
+        </div>
+    </div>
+
+    @if (productData != null && categoryData != null) {
+        <section class="p-4 my-5">
+            <div class="myContainer">
+                <h1 class="main-title">Shop Popular Categories</h1>
+                <owl-carousel-o [options]="categoryCustomOptions">
+                    @for (category of categoryData; track category._id) {
+                        <ng-template carouselSlide>
+                            <img [src]="category.image" [alt]="category.name" class="w-full h-[15.625rem]">
+                        </ng-template>
+                    }
+                </owl-carousel-o>
+            </div>
+        </section>
+        
+        <section class="rounded p-4 my-5">
+            <div class="myContainer">
+                <input [(ngModel)]="searchValue" type="text" class="rounded w-[50%] block mx-auto" placeholder="Search by name ....">
+                <h1 class="main-title">All Products</h1>
+                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+                    @for (product of productData.slice(0,20) |search : searchValue; track product._id) {
+                        <div class="product cursor-pointer p-4 relative">
+                            <div>
+                                <span (click)="addToWishlist(product._id)"  [class.text-red-600]="added" class="absolute top-[2px] end-[2px] py-2 px-3 rounded-full hover:text-red-600"><i class="fa-solid fa-heart fa-lg"></i></span>
+                            </div>
+                            <div [routerLink]="['/product-details' , product._id ]">
+                                <div class="mt-4">
+                                    <img [src]="product.imageCover" [alt]="product.title">
+                                </div>
+                                <div class="mt-4">
+                                    <h2 class="text-main">{{product.category.name}}</h2>
+                                    <h1 class="font-black">{{product.title.split(' ').slice(0,3).join(' ')}}</h1>
+                                </div>
+                                <div class="flex flex-wrap mt-4 justify-between">
+                                    <h3>{{product.price}}</h3>
+                                    <span><i class="rating-color fa-solid fa-star"></i> {{product.ratingsAverage}}</span>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <button (click)="addToCart(product._id)" class="btn-main block w-3/4 mx-auto">+Add to cart</button>
+                            </div>
+                        </div>
+                    }
+                    @defer (on viewport(icon)) {
+                        @for (product of productData.slice(20) |search : searchValue; track product._id) {
+                            <div class="product cursor-pointer p-4 relative">
+                                <div>
+                                    <span (click)="addToWishlist(product._id)"  [class.text-red-600]="added" class="absolute top-[2px] end-[2px] py-2 px-3 rounded-full hover:text-red-600"><i class="fa-solid fa-heart fa-lg"></i></span>
+                                </div>
+                                <div [routerLink]="['/product-details' , product._id ]">
+                                    <div class="mt-4">
+                                        <img [src]="product.imageCover" [alt]="product.title">
+                                    </div>
+                                    <div class="mt-4">
+                                        <h2 class="text-main">{{product.category.name}}</h2>
+                                        <h1 class="font-black">{{product.title.split(' ').slice(0,3).join(' ')}}</h1>
+                                    </div>
+                                    <div class="flex flex-wrap mt-4 justify-between">
+                                        <h3>{{product.price}}</h3>
+                                        <span><i class="rating-color fa-solid fa-star"></i> {{product.ratingsAverage}}</span>
+                                    </div>
+                                </div>
+                                <div class="mt-4">
+                                    <button (click)="addToCart(product._id)" class="btn-main block w-3/4 mx-auto">+Add to cart</button>
+                                </div>
+                            </div>
+                        }
+                    }@placeholder (minimum 5s) {
+                        <div class="flex justify-center">
+                            <i #icon class="fa-solid fa-arrow-circle-down text-main fa-2x"></i>
+                        </div>
+                    }@error {
+                        <p class="text-center font-black">oops something went wrong</p>
+                    }
+                </div>
+            </div>
+        </section>
+    }
+</section>

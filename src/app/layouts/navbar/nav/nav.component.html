@@ -1,0 +1,61 @@
+<nav class="bg-gray-100 sticky top-0 end-0 start-0 border-gray-200">
+    <div class="max-w-[95%] mx-auto flex flex-wrap items-center justify-between py-2 px-3">
+      <a  class="flex items-center space-x-3 rtl:space-x-reverse md:w-[10%]">
+          <span class="self-center text-2xl font-semibold whitespace-nowrap">
+            <img src="./images/freshcart-logo.svg" alt="">
+          </span>
+      </a>
+      <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
+          <span class="sr-only">Open main menu</span>
+          <span aria-hidden="true"  fill="none" viewBox="0 0 17 14">
+            <i class="fa-solid fa-sliders"></i>
+          </span>
+      </button>
+      <div class="hidden w-full md:flex md:justify-between md:w-[90%]" id="navbar-default">
+        @if (check() == true) {
+          <ul class="font-medium p-4 mt-3 flex flex-col md:flex-row md:mt-0 rounded-lg mx-auto">
+            <li>
+              <a class="block py-2 px-3 rounded-md" routerLink="home" routerLinkActive="text-main">Home</a>
+            </li>
+            <li>
+              <a class="block py-2 px-3 rounded-md" routerLink="products" routerLinkActive="text-main">Products</a>
+            </li>
+            <li>
+              <a class="block py-2 px-3 rounded-md" routerLink="categories" routerLinkActive="text-main">Categories</a>
+            </li>
+            <li>
+              <a class="block py-2 px-3 rounded-md" routerLink="brands" routerLinkActive="text-main">Brands</a>
+            </li>
+          </ul>
+        }
+
+        <ul class="font-medium p-4 ms-auto mt-3 flex flex-col md:flex-row md:mt-0 rounded-lg">
+          @if (check() == true) {
+            <li>
+              <a class="block py-2 px-3 rounded-full hover:text-red-600" routerLink="wishlist" routerLinkActive="text-red-800"><i class="fa-solid fa-heart fa-lg"></i></a>
+            </li>
+            <li>
+              <a class="cart block py-2 px-3 rounded-full relative" routerLink="cart" routerLinkActive="text-main">
+                <i class="fa-solid fa-cart-shopping fa-lg"></i>
+                <span class="absolute top-0 end-0 text-main bg-gray-900/80 text-center text-sm align-middle w-[20px] h-[20px] rounded-full">{{navCartItems}}</span>
+              </a>
+            </li>
+          }
+          @if (check() == false) {
+            <li>
+              <a class="block py-2 px-3 rounded-full" routerLink="login" routerLinkActive="text-main">Login</a>
+            </li>
+            <li>
+              <a class="block py-2 px-3 rounded-full" routerLink="register" routerLinkActive="rating-color">Register</a>
+            </li>
+          }
+          @if (check() == true) {
+            <li>
+              <a (click)="logOut()" class="block py-2 px-3 rounded-full hover:cursor-pointer">Log out</a>
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+  </nav>
+  

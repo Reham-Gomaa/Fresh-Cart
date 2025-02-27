@@ -1,0 +1,39 @@
+@if (cartData) {
+<section class="p-4 my-5 bg-slate-100 rounded w-[85%] md:w-2/3 mx-auto shadow-md relative">
+    <div class="myContainer">
+        <h1 class="text-3xl my-2">Cart :</h1>
+        <h2 class="text-main my-2">Total cart price : @if (cartData.totalCartPrice != null) { {{cartData.totalCartPrice|currency: 'GBP' }} }@else { {{ 0|currency: 'GBP' }} } </h2>
+            @for (product of cartData.products; track product.product) {
+                <div class="flex flex-wrap justify-between items-center p-4 border-b-[1px] border-gray-300/60">
+                    <div class="w-full md:w-1/5">
+                        <div>
+                            <img [src]="product.product.imageCover" [alt]="product.product.title" class="w-full object-contain">
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2">
+                        <div>
+                            <h2>{{product.product.title}}</h2>
+                            <h3 class="text-main">Price : {{product.price}}</h3>
+                            <h3 (click)="deleteItemFromCart(product.product._id)" class="cursor-pointer"><span class="text-red-700"><i class="fa-solid fa-trash-can"></i></span> Remove</h3>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/5">
+                        <div class="flex items-center justify-center">
+                            <span (click)="updateQuantity(product.product._id , product.count +1)" class="text-main cursor-pointer"><i class="fa-solid fa-circle-plus me-3"></i></span>
+                            <h3>{{product.count}}</h3>
+                            <span (click)="updateQuantity(product.product._id , product.count -1)" class="text-main cursor-pointer"><i class="fa-solid fa-circle-minus ms-3"></i></span>
+                        </div>
+                    </div>
+                </div>
+            }
+            @if ( cartData.products.length > 0 ) {
+                <div class=" p-4 flex items-center justify-end">
+                    <button (click)=" clearCart()" class="btn-border-main me-3">Clear Cart</button>
+                    <button [routerLink]="['/checkout' , cartData._id]" class="btn-main hover:bg-transparent hover:text-black ">Check out</button>
+                </div>
+            }
+        </div>
+    </section>
+}
+    
+

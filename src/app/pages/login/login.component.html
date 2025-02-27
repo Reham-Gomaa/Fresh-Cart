@@ -1,0 +1,60 @@
+<section class="p-4 my-4 bg-slate-100 rounded w-2/3 mx-auto shadow-md relative">
+    <h1 class="text-main font-black">Signin now :</h1>
+    @if (successMsg) {<span class="absolute top-5 end-5 bg-emerald-100 text-emerald-800 rounded-md px-4 py-2">{{successMsg}}</span>}
+    @if (errorMsg) {<span class="absolute top-5 end-5 bg-red-100 text-red-800 rounded-md px-4 py-2">{{errorMsg}}</span>}
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+        
+        <div class="my-5">
+            @let emailControl = loginForm.get('email');
+            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">email:</label>
+            <input [class]="{
+                'myValid' : !emailControl?.errors && (emailControl?.touched || emailControl?.dirty),
+                'myInValid' : emailControl?.errors && (emailControl?.touched || emailControl?.dirty)
+            }" formControlName="email" type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 " required />
+            @if (emailControl?.errors && emailControl?.touched) {
+                <div class="flex p-4 my-5 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                    <svg class="shrink-0 inline w-4 h-4 me-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                    </svg>
+                    <span class="sr-only">Danger</span>
+                    <div>
+                        <ul class="mt-1.5 list-disc list-inside">
+                          @if (emailControl?.getError('required')) {<li>email is required</li>}
+                          @if (emailControl?.getError('email')) {<li>wrong email</li>}
+                      </ul>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="my-5">
+            @let passControl = loginForm.get('password');
+            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">password:</label>
+            <input  [class]="{
+                'myValid' : !passControl?.errors && (passControl?.touched || passControl?.dirty),
+                'myInValid' : passControl?.errors && (passControl?.touched || passControl?.dirty)
+            }"formControlName="password" type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 " required />
+              @if (passControl?.errors && passControl?.touched) {
+                <div class="flex p-4 my-5 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                    <svg class="shrink-0 inline w-4 h-4 me-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                    </svg>
+                    <span class="sr-only">Danger</span>
+                    <div>
+                        <ul class="mt-1.5 list-disc list-inside">
+                          @if (passControl?.getError('required')) {<li>password is required</li>}
+                          @if (passControl?.getError('email')) {<li>wrong password</li>}
+                      </ul>
+                    </div>
+                </div>
+            }
+        </div>
+       
+        <div class="flex justify-between items-center">
+            <span routerLink="/forgetpassword" class="cursor-pointer">Forgot your password?</span>
+            <button [disabled]="loginForm.invalid" class="my-btn disabled:bg-slate-200">
+                @if (!loading) {<span>login <i class="fa-solid fa-right-to-bracket"></i></span>}
+                @if (loading) {<span><i class="fa-solid fa-circle-notch fa-spin"></i></span>}
+            </button>
+        </div>
+    </form>
+</section>

@@ -1,0 +1,30 @@
+@if (wishlist) {
+    <section class="p-4 my-5 bg-slate-100 rounded w-[85%] md:w-2/3 mx-auto shadow-md relative">
+        <div class="myContainer">
+                @for (product of wishlist; track product._id) {
+                    <div class="flex flex-wrap justify-between items-center p-4 border-b-[1px] border-gray-300/60">
+                        <div class="w-full md:w-1/5">
+                            <div>
+                                <img [src]="product.imageCover" [alt]="product.title" class="w-full object-contain">
+                            </div>
+                        </div>
+                        <div class="w-full md:w-1/2">
+                            <div>
+                                <h2>{{product.title}}</h2>
+                                <h3 class="text-main">Price : {{product.price}}</h3>
+                                <h3 (click)="deleteItemFromWishlist(product._id)" class="cursor-pointer"><span class="text-red-700"><i class="fa-solid fa-trash-can"></i></span> Remove</h3>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-1/5">
+                            <div class="flex items-center justify-center">
+                                <button (click)="addToCart(product._id)" class="btn-main block  mx-auto">+Add to cart</button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </section>
+    }
+        
+    
+    

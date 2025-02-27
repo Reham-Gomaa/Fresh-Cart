@@ -1,0 +1,14 @@
+<section class="p-4 my-4 bg-slate-100 rounded w-2/3 mx-auto shadow-md">
+    <form [formGroup]="verifyCodeForm" (ngSubmit)="verifyCode()">
+        <h1 class="font-black mb-2">Please enter your Verification Code :</h1>
+        <div class="relative">
+            @let codeControl = verifyCodeForm.get('resetCode');
+            <input [class]="{
+                'myValid' : !codeControl?.errors && (codeControl?.touched || codeControl?.dirty),
+                'myInValid' : codeControl?.errors && (codeControl?.touched || codeControl?.dirty)
+            }" formControlName="resetCode" type="text" id="floating_filled" class=" block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-bg-main peer" placeholder="" />
+            <label for="floating_filled" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Code</label>
+        </div>
+        <button class="my-btn bg-main mt-2">Verify</button>
+    </form>
+</section>

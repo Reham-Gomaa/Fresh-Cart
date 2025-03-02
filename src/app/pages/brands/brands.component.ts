@@ -9,15 +9,17 @@ import { Subscription } from 'rxjs';
   templateUrl: './brands.component.html',
   styleUrl: './brands.component.scss'
 })
-export class BrandsComponent implements OnInit {
+export class BrandsComponent implements OnInit , OnDestroy{
 
   brands !:IBrands[];
   specificBrand !: IBrands;
+  allsubID !:Subscription;
+  specificsubID !:Subscription;
 
   constructor( private _BrandsService : BrandsService ){}
 
   ngOnInit(): void {
-    this._BrandsService.getAllBrands().subscribe({
+    this.allsubID = this._BrandsService.getAllBrands().subscribe({
       next:(res)=>{
         this.brands = res.data;
       }
@@ -25,11 +27,17 @@ export class BrandsComponent implements OnInit {
   }
 
   getBrand(b_id:string){
-    this._BrandsService.getSpecificBrand(b_id).subscribe({
+    this.specificsubID = this._BrandsService.getSpecificBrand(b_id).subscribe({
       next:(res)=>{
         this.specificBrand = res.data;
+        
       }
     })
+  }
+
+  ngOnDestroy(): void {
+    this.allsubID?.unsubscribe();
+    this.specificsubID?.unsubscribe();
   }
 
 }

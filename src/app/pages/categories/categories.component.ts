@@ -30,13 +30,14 @@ export class CategoriesComponent implements OnInit , OnDestroy{
     this.specificSubID = this._CategoriesService.getSpecificCategory(c_id).subscribe({
       next:(res)=>{
         this.category = res.data;
+        
       }
     })
   }
 
   ngOnDestroy(): void {
-    this.allSubID.unsubscribe();
-    this.specificSubID.unsubscribe();
+    this.allSubID?.unsubscribe();
+    this.specificSubID?.unsubscribe();
   }
 
 }

@@ -4,25 +4,28 @@
                 @for (order of userOrders; track order.id) {
                     <div class="flex flex-wrap justify-between items-center p-4 border-b-[1px] border-gray-300/60">
                         <div class="w-full md:w-1/2">
-                            <h1></h1>
+                            <h1 class="font-black my-3"> <span class="text-main">Order_ID:</span> {{order._id}}</h1>
                         </div>
-                        <!-- <div class="w-full md:w-1/5">
-                            <div>
-                                <img [src]="order.cartItems.forEach( item => {item.product.imageCover} )" [alt]="product.title" class="w-full object-contain">
+                       @for (item of order.cartItems; track item._id) {
+                        <div class="myContainer flex justify-between items-center my-3">
+                            <div class="w-full md:w-1/5">
+                                <div>
+                                    <img [src]="item.product.imageCover" [alt]="item.product.title" class="w-full object-contain">
+                                </div>
+                            </div>
+                            <div class="w-full md:w-2/5">
+                                <div>
+                                    <h2>{{item.product.title}}</h2>
+                                    <h3 class="text-main">Price : {{item.price}}</h3>
+                                </div>
+                            </div>
+                            <div class="w-full md:w-1/5">
+                                <div class="flex items-center justify-center">
+                                    <button (click)="addToCart(item.product._id)" class="btn-main block  mx-auto">Buy again</button>
+                                </div>
                             </div>
                         </div>
-                        <div class="w-full md:w-1/2">
-                            <div>
-                                <h2>{{product.title}}</h2>
-                                <h3 class="text-main">Price : {{product.price}}</h3>
-                                <h3 (click)="deleteItemFromWishlist(product._id)" class="cursor-pointer"><span class="text-red-700"><i class="fa-solid fa-trash-can"></i></span> Remove</h3>
-                            </div>
-                        </div>
-                        <div class="w-full md:w-1/5">
-                            <div class="flex items-center justify-center">
-                                <button (click)="addToCart(product._id)" class="btn-main block  mx-auto">+Add to cart</button>
-                            </div>
-                        </div> -->
+                       }
                     </div>
                 }
             </div>

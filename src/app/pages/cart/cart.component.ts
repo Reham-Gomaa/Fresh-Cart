@@ -60,10 +60,10 @@ export class CartComponent implements OnInit , OnDestroy{
   }
 
   ngOnDestroy(): void {
-    this.loggedUserSubID.unsubscribe();
-    this.removeItemSubID.unsubscribe();
-    this.updateQuantitySubID.unsubscribe();
-    this.clearCartSubID.unsubscribe();
+    this.loggedUserSubID?.unsubscribe();
+    this.removeItemSubID?.unsubscribe();
+    this.updateQuantitySubID?.unsubscribe();
+    this.clearCartSubID?.unsubscribe();
   }
 
 }

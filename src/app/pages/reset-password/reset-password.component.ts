@@ -37,6 +37,6 @@ export class ResetPasswordComponent implements OnDestroy{
   }
 
   ngOnDestroy(): void {
-    this.subID.unsubscribe();
+    this.subID?.unsubscribe();
   }
 }

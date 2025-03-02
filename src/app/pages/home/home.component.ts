@@ -100,7 +100,7 @@ export class HomeComponent implements OnInit , OnDestroy{
   }
 
   addToCart(p_id:string){
-    this._CartService.AddProductToCart(p_id).subscribe({
+    this.addCartSubID = this._CartService.AddProductToCart(p_id).subscribe({
       next: (res)=> {
         this._CartService.numOfCartItems.next(res.numOfCartItems);  
         this._ToastrService.success( res.message , 'FreshCart')
@@ -109,7 +109,7 @@ export class HomeComponent implements OnInit , OnDestroy{
   }
 
   addToWishlist(p_id:string){
-    this._WishlistService.addProductToWishlist(p_id).subscribe({
+    this.addListSubID = this._WishlistService.addProductToWishlist(p_id).subscribe({
       next:(res)=>{
         this.added = true;
         this._ToastrService.success(res.message , 'FreshCart')

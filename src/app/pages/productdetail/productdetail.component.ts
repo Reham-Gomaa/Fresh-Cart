@@ -64,8 +64,8 @@ export class ProductdetailComponent implements OnInit , OnDestroy{
   }
 
   ngOnDestroy(): void {
-    this.routeSubID.unsubscribe();
-    this.specificSubID.unsubscribe();
-    this.addSubID.unsubscribe();
+    this.routeSubID?.unsubscribe();
+    this.specificSubID?.unsubscribe();
+    this.addSubID?.unsubscribe();
   }
 }

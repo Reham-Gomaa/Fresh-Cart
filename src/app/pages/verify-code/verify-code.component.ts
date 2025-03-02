@@ -34,6 +34,6 @@ export class VerifyCodeComponent implements OnDestroy{
   }
 
   ngOnDestroy(): void {
-    this.subID.unsubscribe();
+    this.subID?.unsubscribe();
   }
 }

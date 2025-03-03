@@ -38,7 +38,7 @@
                     @for (product of productData.slice(0,20) |search : searchValue; track product._id) {
                         <div class="product cursor-pointer p-4 relative">
                             <div>
-                                <span (click)="addToWishlist(product._id)"  [class.text-red-600]="added" class="absolute top-[2px] end-[2px] py-2 px-3 rounded-full hover:text-red-600"><i class="fa-solid fa-heart fa-lg"></i></span>
+                                <span (click)="addToWishlist(product._id)"  [class.text-red-600]="isInWishlist(product._id)" class="absolute top-[2px] end-[2px] py-2 px-3 rounded-full hover:text-red-600"><i class="fa-solid fa-heart fa-lg"></i></span>
                             </div>
                             <div [routerLink]="['/product-details' , product._id ]">
                                 <div class="mt-4">
@@ -62,7 +62,7 @@
                         @for (product of productData.slice(20) |search : searchValue; track product._id) {
                             <div class="product cursor-pointer p-4 relative">
                                 <div>
-                                    <span (click)="addToWishlist(product._id)"  [class.text-red-600]="added" class="absolute top-[2px] end-[2px] py-2 px-3 rounded-full hover:text-red-600"><i class="fa-solid fa-heart fa-lg"></i></span>
+                                    <span (click)="addToWishlist(product._id)"  [class.text-red-600]="isInWishlist(product._id)" class="absolute top-[2px] end-[2px] py-2 px-3 rounded-full hover:text-red-600"><i class="fa-solid fa-heart fa-lg"></i></span>
                                 </div>
                                 <div [routerLink]="['/product-details' , product._id ]">
                                     <div class="mt-4">

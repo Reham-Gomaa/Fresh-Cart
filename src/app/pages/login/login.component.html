@@ -42,7 +42,7 @@
                     <div>
                         <ul class="mt-1.5 list-disc list-inside">
                           @if (passControl?.getError('required')) {<li>password is required</li>}
-                          @if (passControl?.getError('email')) {<li>wrong password</li>}
+                          @if (passControl?.getError('pattern')) {<li>password should be at least 6 characters including numbers and special letters</li>}
                       </ul>
                     </div>
                 </div>

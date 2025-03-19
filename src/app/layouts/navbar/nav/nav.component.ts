@@ -1,4 +1,4 @@
-import { Component, input, InputSignal, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject , input, InputSignal, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../../core/services/authentication/auth.service';
 import { CartService } from '../../../core/services/cart/cart.service';
@@ -23,17 +23,19 @@ export class NavComponent implements OnInit , OnDestroy{
   ){}
 
   ngOnInit(): void {
-    this.loggedUserSubID = this._CartService.GetLoggedUserCart().subscribe({
-      next:(res)=>{
-        this.navCartItems = res.numOfCartItems;
-      }
-    })
-
-    this.unSubCartItems = this._CartService.numOfCartItems.subscribe({
-      next:(value)=>{
-        this.navCartItems = value;
-      }
-    })
+    if(this.check() == true){
+      this.loggedUserSubID = this._CartService.GetLoggedUserCart().subscribe({
+        next:(res)=>{
+          this.navCartItems = res.numOfCartItems;
+        }
+      })
+  
+      this.unSubCartItems = this._CartService.numOfCartItems.subscribe({
+        next:(value)=>{
+          this.navCartItems = value;
+        }
+      })
+    }
   }
 
   logOut(){
@@ -43,8 +45,8 @@ export class NavComponent implements OnInit , OnDestroy{
   }
 
   ngOnDestroy(): void {
-    this.unSubCartItems.unsubscribe();
-    this.loggedUserSubID.unsubscribe();
+    this.unSubCartItems?.unsubscribe();
+    this.loggedUserSubID?.unsubscribe();
   }
 
 }

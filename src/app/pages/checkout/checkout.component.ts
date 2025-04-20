@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { PaymentService } from '../../core/services/orders/payment.service';
 import { Subscription } from 'rxjs';
+import { CartService } from '../../core/services/cart/cart.service';
 
 @Component({
   selector: 'app-checkout',
@@ -22,7 +23,8 @@ export class CheckoutComponent implements OnInit , OnDestroy {
     private _PaymentService : PaymentService , 
     private _ActivatedRoute : ActivatedRoute ,
     private _ToastrService : ToastrService,
-    private _Router : Router
+    private _Router : Router,
+    private _CartService : CartService
   ){}
 
   ngOnInit(): void {
@@ -45,6 +47,7 @@ export class CheckoutComponent implements OnInit , OnDestroy {
       next: (res)=>{
         if(res.status == 'success'){
           this._Router.navigate(['/allorders']);
+          this._CartService.numOfCartItems.next(0);  
         }
       }
     })

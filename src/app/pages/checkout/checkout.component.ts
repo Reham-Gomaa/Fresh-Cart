@@ -60,6 +60,7 @@ export class CheckoutComponent implements OnInit , OnDestroy {
       next: (res)=>{
         if(res.status == 'success'){
           window.open(res.session.url , '_self');
+          this._CartService.numOfCartItems.next(0);  
         }
       }
     })
